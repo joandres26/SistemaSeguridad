@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SistemaSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="IdArticulo" />
+          </Key>
+          <Property Name="IdArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReporteEntregado">
+          <Key>
+            <PropertyRef Name="IdEntrega" />
+          </Key>
+          <Property Name="IdEntrega" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="IdArticulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReporteExtravio">
+          <Key>
+            <PropertyRef Name="IdReporte" />
+          </Key>
+          <Property Name="IdReporte" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido1" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido2" Type="varchar" MaxLength="50" />
+          <Property Name="Contrasenia" Type="varchar" MaxLength="50" />
+          <Property Name="IdRol" Type="int" />
+        </EntityType>
+        <Association Name="FK_Articulo_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteEntrehado_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="ReporteEntregado" Type="Self.ReporteEntregado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="ReporteEntregado">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteEntrehado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ReporteEntregado" Type="Self.ReporteEntregado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReporteEntregado">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteExtravio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ReporteExtravio" Type="Self.ReporteExtravio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReporteExtravio">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaSeguridadModelStoreContainer">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReporteEntregado" EntityType="Self.ReporteEntregado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReporteExtravio" EntityType="Self.ReporteExtravio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articulo_Categoria" Association="Self.FK_Articulo_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteEntrehado_Articulo" Association="Self.FK_ReporteEntrehado_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="ReporteEntregado" EntitySet="ReporteEntregado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteEntrehado_Usuario" Association="Self.FK_ReporteEntrehado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ReporteEntregado" EntitySet="ReporteEntregado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteExtravio_Usuario" Association="Self.FK_ReporteExtravio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ReporteExtravio" EntitySet="ReporteExtravio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SistemaSeguridadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="IdArticulo" />
+          </Key>
+          <Property Name="IdArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="IdEstado" Type="Int32" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Articulo_Categoria" FromRole="Articulo" ToRole="Categoria" />
+          <NavigationProperty Name="ReporteEntregado" Relationship="Self.FK_ReporteEntrehado_Articulo" FromRole="Articulo" ToRole="ReporteEntregado" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_Categoria" FromRole="Categoria" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="ReporteEntregado">
+          <Key>
+            <PropertyRef Name="IdEntrega" />
+          </Key>
+          <Property Name="IdEntrega" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdArticulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK_ReporteEntrehado_Articulo" FromRole="ReporteEntregado" ToRole="Articulo" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_ReporteEntrehado_Usuario" FromRole="ReporteEntregado" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="ReporteExtravio">
+          <Key>
+            <PropertyRef Name="IdReporte" />
+          </Key>
+          <Property Name="IdReporte" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_ReporteExtravio_Usuario" FromRole="ReporteExtravio" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasenia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRol" Type="Int32" />
+          <NavigationProperty Name="ReporteEntregado" Relationship="Self.FK_ReporteEntrehado_Usuario" FromRole="Usuario" ToRole="ReporteEntregado" />
+          <NavigationProperty Name="ReporteExtravio" Relationship="Self.FK_ReporteExtravio_Usuario" FromRole="Usuario" ToRole="ReporteExtravio" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK_Articulo_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteEntrehado_Articulo">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="ReporteEntregado" Type="Self.ReporteEntregado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="IdArticulo" />
+            </Principal>
+            <Dependent Role="ReporteEntregado">
+              <PropertyRef Name="IdArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteEntrehado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ReporteEntregado" Type="Self.ReporteEntregado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReporteEntregado">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReporteExtravio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ReporteExtravio" Type="Self.ReporteExtravio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReporteExtravio">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaSeguridadEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="ReporteEntregado" EntityType="Self.ReporteEntregado" />
+          <EntitySet Name="ReporteExtravio" EntityType="Self.ReporteExtravio" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Articulo_Categoria" Association="Self.FK_Articulo_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteEntrehado_Articulo" Association="Self.FK_ReporteEntrehado_Articulo">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="ReporteEntregado" EntitySet="ReporteEntregado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteEntrehado_Usuario" Association="Self.FK_ReporteEntrehado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ReporteEntregado" EntitySet="ReporteEntregado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReporteExtravio_Usuario" Association="Self.FK_ReporteExtravio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ReporteExtravio" EntitySet="ReporteExtravio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SistemaSeguridadModelStoreContainer" CdmEntityContainer="SistemaSeguridadEntities">
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReporteEntregado">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.ReporteEntregado">
+              <MappingFragment StoreEntitySet="ReporteEntregado">
+                <ScalarProperty Name="IdEntrega" ColumnName="IdEntrega" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReporteExtravio">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.ReporteExtravio">
+              <MappingFragment StoreEntitySet="ReporteExtravio">
+                <ScalarProperty Name="IdReporte" ColumnName="IdReporte" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SistemaSeguridadModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
