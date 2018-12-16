@@ -15,7 +15,7 @@ namespace Sistema.UI.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Josa es gay.";
 
             return View();
         }
