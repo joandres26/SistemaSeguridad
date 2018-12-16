@@ -12,6 +12,7 @@ namespace Sistema.Proyecto.Logica.Accion
         public ActionResult Index()
         {
             return View();
+            //LA VALIDACION DEL LOGIN
         }
     }
 }
