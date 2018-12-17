@@ -11,10 +11,7 @@ namespace Sistema.UI.Controllers
     public class UsuarioController : Controller
     {
         private SistemaSeguridadEntities bd = new SistemaSeguridadEntities();
-        public ActionResult Index()
-        {
-            return View();
-        }
+      
 
         // GET: Usuario
         public ActionResult Usuario()
@@ -25,16 +22,16 @@ namespace Sistema.UI.Controllers
        
 
         [HttpPost]
-        public ActionResult Usuario(int id, string contrasenia)
+        public ActionResult Usuario(Usuario elModelo)
         {
-            Usuario us = bd.Usuario.FirstOrDefault(d => d.idUsuario == id & d.Contrasenia == contrasenia);
+            Usuario us = bd.Usuario.FirstOrDefault(d => d.idUsuario == elModelo.idUsuario & d.Contrasenia == elModelo.Contrasenia);
             if (us != null)
             {
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                RedirectToAction("NoHallado", "Usuario");
+                RedirectToAction("Error", "Home");
             }
 
 
@@ -42,7 +39,7 @@ namespace Sistema.UI.Controllers
         }
 
 
-        public ActionResult NoHallado()
+        public ActionResult Error()
         {
             ViewBag.Error = "No se encontro el usuario con estos datos";
 

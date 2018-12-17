@@ -16,7 +16,8 @@ namespace Sistema.UI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                     defaults: new { controller = "Usuario", action = "Usuario", id = UrlParameter.Optional }
             );
         }
     }
