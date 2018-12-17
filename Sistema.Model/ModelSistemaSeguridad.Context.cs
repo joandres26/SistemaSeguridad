@@ -31,5 +31,6 @@ namespace Sistema.Model
         public virtual DbSet<ReporteExtravio> ReporteExtravio { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
     }
 }

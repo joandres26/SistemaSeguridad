@@ -57,6 +57,9 @@
       <DependentUpon>ModelSistemaSeguridad.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="Estado.cs">
+      <DependentUpon>ModelSistemaSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="MisTablas\Usuarios.cs" />
     <Compile Include="ModelSistemaSeguridad.Context.cs">
       <AutoGen>True</AutoGen>

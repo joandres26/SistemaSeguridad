@@ -16,6 +16,8 @@
         <AssociationConnector Association="SistemaSeguridadModel.FK_ReporteEntrehado_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="SistemaSeguridadModel.FK_ReporteExtravio_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="SistemaSeguridadModel.FK_Usuario_Rol" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SistemaSeguridadModel.Estado" Width="1.5" PointX="0.75" PointY="7.875" />
+        <AssociationConnector Association="SistemaSeguridadModel.FK_Articulo_Estado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

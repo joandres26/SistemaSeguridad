@@ -11,24 +11,18 @@ namespace Sistema.Model
 {
     using System.Runtime.Serialization;using System;
     using System.Collections.Generic;
-    [DataContract] public partial class Articulo
+    [DataContract] public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Articulo()
+        public Estado()
         {
-            this.ReporteEntregado = new HashSet<ReporteEntregado>();
+            this.Articulo = new HashSet<Articulo>();
         }
     
-        [DataMember] public int IdArticulo { get; set; }
-        [DataMember] public int IdCategoria { get; set; }
-        [DataMember] public int IdEstado { get; set; }
-        [DataMember] public string Marca { get; set; }
+        [DataMember] public int idEstado { get; set; }
         [DataMember] public string Descripcion { get; set; }
-        [DataMember] public byte[] Foto { get; set; }
     
-        public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReporteEntregado> ReporteEntregado { get; set; }
-        public virtual Estado Estado { get; set; }
+        public virtual ICollection<Articulo> Articulo { get; set; }
     }
 }
