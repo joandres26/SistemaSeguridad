@@ -12,8 +12,8 @@
           <Property Name="IdArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCategoria" Type="int" Nullable="false" />
           <Property Name="IdEstado" Type="int" Nullable="false" />
-          <Property Name="Marca" Type="varchar" MaxLength="50" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" />
           <Property Name="Foto" Type="image" />
         </EntityType>
         <EntityType Name="Categoria">
