@@ -30,16 +30,16 @@ namespace Sistema.UI.Controllers
             {
                 switch (us.IdRol) {
                     case 1:
-                        Session["Rol"] = 1;
+                        Session["Rol"] = "1";
                         break;
                     case 2:
-                        Session["Rol"] = 2;
+                        Session["Rol"] = "2";
                         break;
                     case 3:
-                        Session["Rol"] = 3;
+                        Session["Rol"] = "3";
                         break;
                     default:
-                        Session["Rol"] = 0;
+                        Session["Rol"] = "0";
                         break;
                     
                 }

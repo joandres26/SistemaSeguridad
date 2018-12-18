@@ -75,8 +75,18 @@ namespace Sistema.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+
                 db.Articulo.Add(articulo);
                 db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                   return View();
+                }
+               
                 return RedirectToAction("Index");
             }
 
