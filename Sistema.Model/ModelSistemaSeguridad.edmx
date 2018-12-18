@@ -34,16 +34,18 @@
           <Key>
             <PropertyRef Name="IdEntrega" />
           </Key>
-          <Property Name="IdEntrega" Type="int" Nullable="false" />
+          <Property Name="IdEntrega" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="IdArticulo" Type="int" Nullable="false" />
+          <Property Name="Celular" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ReporteExtravio">
           <Key>
             <PropertyRef Name="IdReporte" />
           </Key>
-          <Property Name="IdReporte" Type="int" Nullable="false" />
+          <Property Name="IdReporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
@@ -210,6 +212,8 @@
           <Property Name="IdArticulo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Articulo" Relationship="Self.FK_ReporteEntrehado_Articulo" FromRole="ReporteEntregado" ToRole="Articulo" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_ReporteEntrehado_Usuario" FromRole="ReporteEntregado" ToRole="Usuario" />
+          <Property Name="Celular" Type="Int32" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ReporteExtravio">
           <Key>
@@ -388,6 +392,8 @@
           <EntitySetMapping Name="ReporteEntregado">
             <EntityTypeMapping TypeName="SistemaSeguridadModel.ReporteEntregado">
               <MappingFragment StoreEntitySet="ReporteEntregado">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="IdEntrega" ColumnName="IdEntrega" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />

@@ -1,19 +1,75 @@
 ﻿@model IEnumerable<Sistema.Model.Articulo>
 
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
 
 
 
-    <h2>Index</h2>
+<h2>Index</h2>
+@*
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+        @using (Html.BeginForm())
+        {
+
+
+
+
+            foreach (var Articulo in Model)
+            {
+
+
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(model => Articulo.IdEstado, "IdCategoria", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("IdCategoria", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => Articulo.IdEstado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+
+
+
+    }*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("BusquedaCategoria","Articulo",FormMethod.Get))
+{
+<p>
+
+    
+    @*Busqueda por Categoria: @Html.TextBox("NombreCategoria") <br />*@
+
+    Busqueda por Categoria: @Html.DropDownList("Categoria", String.Empty) <br />
+    
+    <input type="submit" value="BusquedaCategoria" />
+
+</p>
+
+
+     }
+
+
     <table class="table">
         <tr>
             <th>
@@ -36,35 +92,35 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado.Descripcion)
-            </td>
-            @{
-                if (Session["Rol"].Equals("2"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo })
-                        @*
-                @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
-                        *@
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+                </td>
+                @{
+                    if (Session["Rol"].Equals("2"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo })
+                            @*
+                                @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
+                            *@
+                        </td>
+                    }
                 }
-             }
-                
+
             </tr>
         }
 

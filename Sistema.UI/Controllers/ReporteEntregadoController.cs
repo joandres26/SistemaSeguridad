@@ -39,8 +39,8 @@ namespace Sistema.UI.Controllers
         // GET: ReporteEntregado/Create
         public ActionResult Create()
         {
-            ViewBag.IdArticulo = new SelectList(db.Articulo, "IdArticulo", "Marca");
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "idUsuario", "Nombre");
+            ViewBag.IdArticulo = new SelectList(db.Articulo.Where(a => a.IdEstado == 1), "IdArticulo", "Descripcion");
+            ViewBag.IdUsuario = new SelectList(db.Usuario.Where(u => u.IdRol== 3), "idUsuario", "Nombre");
             return View();
         }
 
@@ -49,26 +49,17 @@ namespace Sistema.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdEntrega,IdUsuario,Fecha,IdArticulo")] ReporteEntregado reporteEntregado)
+        public ActionResult Create([Bind(Include = "IdEntrega,IdUsuario,Fecha,IdArticulo,Celular,Email")] ReporteEntregado reporteEntregado)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
                 db.ReporteEntregado.Add(reporteEntregado);
                 db.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    return View();
-                }
-               
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdArticulo = new SelectList(db.Articulo, "IdArticulo", "Marca", reporteEntregado.IdArticulo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "idUsuario", "Nombre", reporteEntregado.IdUsuario);
+            ViewBag.IdArticulo = new SelectList(db.Articulo.Where(a => a.IdEstado == 1), "IdArticulo", "Descripcion", reporteEntregado.IdArticulo);
+            ViewBag.IdUsuario = new SelectList(db.Usuario.Where(u => u.IdRol == 3), "idUsuario", "Nombre", reporteEntregado.IdUsuario);
             return View(reporteEntregado);
         }
 
@@ -84,8 +75,8 @@ namespace Sistema.UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdArticulo = new SelectList(db.Articulo, "IdArticulo", "Marca", reporteEntregado.IdArticulo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "idUsuario", "Nombre", reporteEntregado.IdUsuario);
+            ViewBag.IdArticulo = new SelectList(db.Articulo.Where(a => a.IdEstado == 1), "IdArticulo", "Descripcion", reporteEntregado.IdArticulo);
+            ViewBag.IdUsuario = new SelectList(db.Usuario.Where(u => u.IdRol == 3), "idUsuario", "Nombre", reporteEntregado.IdUsuario);
             return View(reporteEntregado);
         }
 
@@ -94,7 +85,7 @@ namespace Sistema.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdEntrega,IdUsuario,Fecha,IdArticulo")] ReporteEntregado reporteEntregado)
+        public ActionResult Edit([Bind(Include = "IdEntrega,IdUsuario,Fecha,IdArticulo,Celular,Email")] ReporteEntregado reporteEntregado)
         {
             if (ModelState.IsValid)
             {
@@ -102,8 +93,8 @@ namespace Sistema.UI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdArticulo = new SelectList(db.Articulo, "IdArticulo", "Marca", reporteEntregado.IdArticulo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "idUsuario", "Nombre", reporteEntregado.IdUsuario);
+            ViewBag.IdArticulo = new SelectList(db.Articulo.Where(a => a.IdEstado == 1), "IdArticulo", "Descripcion", reporteEntregado.IdArticulo);
+            ViewBag.IdUsuario = new SelectList(db.Usuario.Where(u => u.IdRol == 3), "idUsuario", "Nombre", reporteEntregado.IdUsuario);
             return View(reporteEntregado);
         }
 

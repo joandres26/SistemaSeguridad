@@ -24,10 +24,38 @@ namespace Sistema.UI.Controllers
                 IdEstado = 1,
             };
 
-      
+
+            ViewBag.Categoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion");
+
             var articulo = db.Articulo.Include(a => a.Categoria).Include(a => a.Estado).Where(a => a.IdEstado == elModelo.IdEstado);
+
+               
             return View(articulo.ToList());
         }
+
+        //Prueba de busqueda
+     
+     public ActionResult BusquedaCategoria(String Categoria)
+     {
+         ViewBag.Categoria = new SelectList(db.Categoria, "IdCategoria","Descripcion");
+         var catego = from s in db.Articulo.Include(a => a.Categoria) select s;
+
+         if (!String.IsNullOrEmpty(Categoria))
+         {
+               
+                //catego = catego.Where(s => s.Categoria.IdCategoria == Convert.ToInt32(Categoria));
+
+                return View("Index", catego.ToList().Where(x => x.IdCategoria == Convert.ToInt32(Categoria) & x.IdEstado == 1));
+            }
+            else
+            {
+                return View("Index", catego.ToList().Where(a => a.IdEstado == 1));
+            }
+
+        
+     }
+     
+
         /*
         [HttpPost]
         public ActionResult Buscador(Articulo Nombre)
@@ -108,20 +136,10 @@ namespace Sistema.UI.Controllers
                 return HttpNotFound();
             }
 
-            var elModelo1 = new Estado()
-            {
-
-                idEstado = 2,
-            };
-
-            var elModelo2 = new Estado()
-            {
-
-                idEstado = 3,
-            };
+         
 
             ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion", articulo.IdCategoria);
-            ViewBag.IdEstado = new SelectList(db.Estado.Where(e => e.idEstado == elModelo1.idEstado | e.idEstado == elModelo2.idEstado), "idEstado", "Descripcion", articulo.IdEstado);
+            ViewBag.IdEstado = new SelectList(db.Estado.Where(e => e.idEstado == 2 | e.idEstado == 3), "idEstado", "Descripcion", articulo.IdEstado);
             return View(articulo);
         }
 

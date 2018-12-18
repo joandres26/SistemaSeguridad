@@ -17,6 +17,8 @@ namespace Sistema.Model
         [DataMember] public int IdUsuario { get; set; }
         [DataMember] public System.DateTime Fecha { get; set; }
         [DataMember] public int IdArticulo { get; set; }
+        [DataMember] public Nullable<int> Celular { get; set; }
+        [DataMember] public string Email { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual Usuario Usuario { get; set; }
