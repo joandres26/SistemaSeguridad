@@ -36,29 +36,35 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Marca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Foto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado.Descripcion)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo }) 
-                    @*
-        @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
-                    *@
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+            </td>
+            @{
+                if (Session["Rol"].Equals("2"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo })
+                        @*
+                @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
+                        *@
+                    </td>
+                }
+             }
+                
             </tr>
         }
 

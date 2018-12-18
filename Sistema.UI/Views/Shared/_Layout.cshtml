@@ -21,12 +21,40 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Usuario", "Usuario")</li> <!--nombre del link, accion, controller--->
-                    <li>@Html.ActionLink("Mis articulos", "Index", "Articulo")</li> <!--nombre del link, accion, controller--->
-                    <li>@Html.ActionLink("Reporte extravio", "Index", "ReporteExtravio")</li>
+                    @{
+                        if (Session["Rol"].Equals("1"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Usuario", "Usuario")</li>
+                            <li>@Html.ActionLink("Gestion de categorias", "Index", "Categorias")</li>
+                            <li>@Html.ActionLink("Gestion de Usuarios", "Index", "GestionUsuario")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Usuario")</li>
+                        }
+                        else if (Session["Rol"].Equals("2"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Usuario", "Usuario")</li>
+                            <li>@Html.ActionLink("Mis articulos", "Index", "Articulo")</li>
+                            <li>@Html.ActionLink("Reporte extravio", "Index", "ReporteExtravio")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Usuario")</li>
+                        }
+                        else if (Session["Rol"].Equals("3"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Usuario", "Usuario")</li>
+                            <li>@Html.ActionLink("Mis articulos", "Index", "Articulo")</li>
+                            <li>@Html.ActionLink("Reporte extravio", "Index", "ReporteExtravio")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Usuario")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Login", "Usuario", "Usuario")</li>
+                        }
+                    }
+
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -16,6 +16,7 @@ namespace Sistema.UI.Controllers
         // GET: Usuario
         public ActionResult Usuario()
         {
+            Session["Rol"] = "0";
             return View();
         }
 
@@ -27,6 +28,22 @@ namespace Sistema.UI.Controllers
             Usuario us = bd.Usuario.FirstOrDefault(d => d.idUsuario == elModelo.idUsuario & d.Contrasenia == elModelo.Contrasenia);
             if (us != null)
             {
+                switch (us.IdRol) {
+                    case 1:
+                        Session["Rol"] = 1;
+                        break;
+                    case 2:
+                        Session["Rol"] = 2;
+                        break;
+                    case 3:
+                        Session["Rol"] = 3;
+                        break;
+                    default:
+                        Session["Rol"] = 0;
+                        break;
+                    
+                }
+                    
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -38,6 +55,11 @@ namespace Sistema.UI.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session["Rol"] = "0";
+            return RedirectToAction("Error", "Home");
+        }//Fin del método Logout.
 
         public ActionResult Error()
         {
