@@ -177,6 +177,7 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReporteExtravioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,11 +253,15 @@
     <Content Include="Views\Articulo\Details.cshtml" />
     <Content Include="Views\Articulo\Edit.cshtml" />
     <Content Include="Views\Articulo\Index.cshtml" />
+    <Content Include="Views\ReporteExtravio\Create.cshtml" />
+    <Content Include="Views\ReporteExtravio\Delete.cshtml" />
+    <Content Include="Views\ReporteExtravio\Details.cshtml" />
+    <Content Include="Views\ReporteExtravio\Edit.cshtml" />
+    <Content Include="Views\ReporteExtravio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\ReporteExtravio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

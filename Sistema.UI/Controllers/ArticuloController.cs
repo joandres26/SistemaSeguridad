@@ -24,8 +24,7 @@ namespace Sistema.UI.Controllers
                 IdEstado = 1,
             };
 
-
-           
+      
             var articulo = db.Articulo.Include(a => a.Categoria).Include(a => a.Estado).Where(a => a.IdEstado == elModelo.IdEstado);
             return View(articulo.ToList());
         }
@@ -98,8 +97,21 @@ namespace Sistema.UI.Controllers
             {
                 return HttpNotFound();
             }
+
+            var elModelo1 = new Estado()
+            {
+
+                idEstado = 2,
+            };
+
+            var elModelo2 = new Estado()
+            {
+
+                idEstado = 3,
+            };
+
             ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion", articulo.IdCategoria);
-            ViewBag.IdEstado = new SelectList(db.Estado, "idEstado", "Descripcion", articulo.IdEstado);
+            ViewBag.IdEstado = new SelectList(db.Estado.Where(e => e.idEstado == elModelo1.idEstado | e.idEstado == elModelo2.idEstado), "idEstado", "Descripcion", articulo.IdEstado);
             return View(articulo);
         }
 
