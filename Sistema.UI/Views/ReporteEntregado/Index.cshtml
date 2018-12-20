@@ -6,12 +6,29 @@
 }
 
 
-<h2>Index</h2>
+<h2>Reportes de Entrega</h2>
 
 
 <p>
     @Html.ActionLink("Crear Nuevo Reporte de entrega", "Create")
 </p>
+
+@using (Html.BeginForm("BusquedaFecha", "ReporteEntregado", FormMethod.Get))
+{
+<p>
+
+
+    <input type="date" name="FechaInicial" data-date-format="yyyy-mm-dd"  />
+
+    <input type="date" name="FechaFinal" data-date-format="yyyy-mm-dd"  />
+
+    <input type="submit" value="BusquedaFecha" />
+
+</p>
+
+
+}
+
 <table class="table">
     <tr>
         <th>

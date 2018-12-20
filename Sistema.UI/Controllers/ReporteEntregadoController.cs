@@ -21,6 +21,33 @@ namespace Sistema.UI.Controllers
             return View(reporteEntregado.ToList());
         }
 
+
+
+        public ActionResult BusquedaFecha(Nullable<DateTime> FechaInicial, Nullable<DateTime> FechaFinal)
+        {
+            
+            var reporte = from s in db.ReporteEntregado select s;
+
+            if (!String.IsNullOrEmpty(FechaInicial.ToString()) || !String.IsNullOrEmpty(FechaFinal.ToString()))
+            {
+
+                //catego = catego.Where(s => s.Categoria.IdCategoria == Convert.ToInt32(Categoria));
+
+                return View("Index", reporte.ToList().Where(x => x.Fecha >= FechaInicial & x.Fecha <= FechaFinal).OrderBy(x=> x.Fecha));
+            }
+            else
+            {
+                return View("Index", reporte.ToList());
+            }
+
+
+        }
+
+
+
+
+
+
         // GET: ReporteEntregado/Details/5
         public ActionResult Details(int? id)
         {
