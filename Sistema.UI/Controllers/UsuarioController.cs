@@ -58,7 +58,7 @@ namespace Sistema.UI.Controllers
         public ActionResult Logout()
         {
             Session["Rol"] = "0";
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Usuario", "Usuario");
         }//Fin del método Logout.
 
         public ActionResult Error()

@@ -3,7 +3,7 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Articulos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -50,7 +50,7 @@
     }*@
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear un nuevo articulo en custodia", "Create")
 </p>
 
 @using (Html.BeginForm("BusquedaCategoria","Articulo",FormMethod.Get))
@@ -82,10 +82,10 @@
                 @Html.DisplayNameFor(model => model.Foto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria.Descripcion)
+                @Html.DisplayName("Categoria")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado.Descripcion)
+                @Html.DisplayName("Estado")
             </th>
             <th></th>
         </tr>

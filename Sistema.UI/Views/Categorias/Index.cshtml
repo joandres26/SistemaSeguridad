@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<Sistema.Model.Categoria>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Categorias";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear una nueva categoria de articulo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            @Html.DisplayName("Nombre")
         </th>
         <th></th>
     </tr>

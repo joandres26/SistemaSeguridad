@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Sistema.Model.Usuario>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear un nuevo usuario", "Create")
 </p>
 <table class="table">
     <tr>
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.Contrasenia)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rol.Descripcion)
+            @Html.DisplayName("Rol")
         </th>
         <th></th>
     </tr>

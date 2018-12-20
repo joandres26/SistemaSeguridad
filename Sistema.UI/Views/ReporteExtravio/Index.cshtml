@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Sistema.Model.ReporteExtravio>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reportes de Extravio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo reporte de extravio", "Create")
 </p>
 <table class="table">
     <tr>
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NombreContacto)
+            @Html.DisplayName("Nombre del Contacto")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Usuario.Nombre)
