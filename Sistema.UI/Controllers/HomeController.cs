@@ -15,7 +15,7 @@ namespace Sistema.UI.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Josa es gay y se la come toda.";
+            ViewBag.Message = ".";
 
             return View();
         }
