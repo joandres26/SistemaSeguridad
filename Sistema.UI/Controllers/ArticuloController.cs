@@ -101,6 +101,9 @@ namespace Sistema.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdArticulo,IdCategoria,IdEstado,Marca,Descripcion,Foto")] Articulo articulo)
         {
+
+
+
             if (ModelState.IsValid)
             {
                 try
