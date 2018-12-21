@@ -72,6 +72,93 @@ namespace Sistema.Test
 
         }//LoginTest
 
+        [TestMethod]
+        public void CreateArticuloTest()
+        {
+            Articulo a = new Articulo();
+            var result = "";
+            if (a.IdArticulo == 1)
+            {
+                result = "pass";
+            }
+            else {
+                result = "fail";
+            }
+            Assert.AreEqual(result,"fail"); // prueba donde no se ha creado articulo
 
+            a.IdArticulo = 1;
+            a.IdCategoria = 1;
+            a.IdEstado = 1;
+            a.Descripcion = "aaa";
+            a.Marca = null;
+            a.Foto = null;
+
+            if (a.IdArticulo == 1)
+            {
+                result = "pass";
+            }
+            else
+            {
+                result = "fail";
+            }
+            Assert.AreEqual(result, "pass");
+
+
+        }//CreateArticuloTest
+
+        [TestMethod]
+        public void BusquedaCategoriaTest()
+        {
+            Articulo[] ar = new Articulo[15];
+            var result = "";
+            for (int i = 0; i < 15; i++)
+            {
+                ar[i] = new Articulo();
+                ar[i].IdArticulo = i;
+                ar[i].IdCategoria = i;
+                ar[i].IdEstado = i;
+                ar[i].Descripcion = "aaa"+i;
+                ar[i].Marca = null;
+                ar[i].Foto = null;
+            }
+            for (int j = 0; j < 15; j++)
+            {
+                if (ar[j].IdCategoria == 6) {
+                    result = "pass";
+                }
+            }
+            Assert.AreEqual(result, "pass");
+        }//BusquedaCategoriaTest
+        [TestMethod]
+        public void BusquedaPorFechaTest()
+        {
+            ReporteEntregado[] rp = new ReporteEntregado[15];
+            string result = "";
+            DateTime Now = new DateTime();
+            Now = new DateTime(2018,11,30);
+            for (int i = 0; i < 15; i++)
+            {
+                rp[i] = new ReporteEntregado();
+                rp[i].IdEntrega = i;
+                rp[i].IdUsuario = i;
+                rp[i].Fecha = Now.AddDays(i+1);
+                rp[i].IdArticulo = i;
+                rp[i].Celular = null;
+                rp[i].Email = "e";
+            }
+            DateTime FechaInicial = new DateTime(2018, 12,2);
+            DateTime FechaFinal = new DateTime(2018,12,6);
+
+            for (int j = 0; j < 15; j++)
+            {
+                if (rp[j].Fecha >= FechaInicial && rp[j].Fecha <= FechaFinal)
+                {
+                    result = result+ rp[j].Fecha.ToString()+" ";
+                }
+            }
+            Assert.AreEqual(result, "2/12/2018 12:00:00 a. m. 3/12/2018 12:00:00 a. m. 4/12/2018 12:00:00 a. m. 5/12/2018 12:00:00 a. m. 6/12/2018 12:00:00 a. m. ");
+        }//BusquedaPorFechaTest
     }
 }
+
+
