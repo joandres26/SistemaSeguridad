@@ -48,80 +48,82 @@
 
 
     }*@
-
-<p>
-    @Html.ActionLink("Crear un nuevo articulo en custodia", "Create")
-</p>
-
-@using (Html.BeginForm("BusquedaCategoria","Articulo",FormMethod.Get))
+@{
+    if (Session["Rol"].Equals("2"))
+    {
+        <p>
+            @Html.ActionLink("Crear un nuevo articulo en custodia", "Create")
+        </p>
+    } }
+@using (Html.BeginForm("BusquedaCategoria", "Articulo", FormMethod.Get))
 {
-<p>
-
-    
-    @*Busqueda por Categoria: @Html.TextBox("NombreCategoria") <br />*@
-
-    Busqueda por Categoria: @Html.DropDownList("Categoria", String.Empty) <br />
-    
-    <input type="submit" value="BusquedaCategoria" />
-
-</p>
+    <p>
 
 
-     }
+        @*Busqueda por Categoria: @Html.TextBox("NombreCategoria") <br />*@
+
+        Busqueda por Categoria: @Html.DropDownList("Categoria", String.Empty) <br />
+
+        <input type="submit" value="BusquedaCategoria" />
+
+    </p>
 
 
-    <table class="table">
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Foto)
+        </th>
+        <th>
+            @Html.DisplayName("Categoria")
+        </th>
+        <th>
+            @Html.DisplayName("Estado")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Marca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                @Html.DisplayName("Categoria")
-            </th>
-            <th>
-                @Html.DisplayName("Estado")
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Marca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Foto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado.Descripcion)
-                </td>
-                @{
-                    if (Session["Rol"].Equals("2"))
-                    {
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo })
-                            @*
-                                @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
-                            *@
-                        </td>
-                    }
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+            </td>
+            @{
+                if (Session["Rol"].Equals("2"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulo })
+                        @*
+                            @Html.ActionLink("Details", "Details", new { id = item.IdArticulo }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulo })
+                        *@
+                    </td>
                 }
+            }
 
-            </tr>
-        }
+        </tr>
+    }
 
-    </table>
+</table>
